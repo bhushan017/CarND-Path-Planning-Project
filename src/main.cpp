@@ -350,7 +350,7 @@ int main() {
                     double check_car_s = sensor_fusion[i][5];
 
                     check_car_s+=((double)prev_size*.02*check_speed);
-                    if (check_car_s > car_s && check_car_s-car_s < 30)
+                    if (check_car_s > car_s && check_car_s-car_s < 35)
                     {
                       too_close = true;
                       closest_speed = check_speed;
@@ -384,7 +384,7 @@ int main() {
                     auto ids = SensorFussionLaneIds(check_lane,sensor_fusion);
                     double nearest = NearestApproach(ids, sensor_fusion, .02*prev_size, car_s);
 
-                    double buffer = 10;
+                    double buffer = 15;
 
                     if (nearest < buffer)
                       cost+=pow(10,5);
@@ -399,7 +399,7 @@ int main() {
 
                   // if we are close and going faster then the average
                   if (best_lane == lane && (ref_vel > lane_speeds[lane] || ref_vel > closest_speed))
-                    ref_vel -= .224;
+                    ref_vel -= (.224*2);
 
                   // change lanes
                   lane = best_lane;
